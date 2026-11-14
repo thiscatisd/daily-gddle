@@ -1,0 +1,243 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GDdle - your daily Geometry Dash level</title>
+<meta name="description" content="One roll a day. One Geometry Dash level. Famous, long and brutal levels are rarer, and lucky IDs score big.">
+<meta name="theme-color" content="#0b0d10"><link rel="canonical" href="https://gd.dcat.rip/">
+<meta property="og:title" content="GDdle"><meta property="og:description" content="Roll your daily Geometry Dash level and see how rare it is."><meta property="og:url" content="https://gd.dcat.rip/"><meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%B2%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ac:#7c4dff;--bg:#0b0d10;--card:#16181d;--line:#262a31;--tx:#eef0f4;--mute:#8b909c;--c:#6b7280}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -10%,#1a1d26,var(--bg) 60%) fixed;color:var(--tx);font:15px Inter,system-ui,sans-serif;min-height:100vh}
+header{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;font:700 18px 'Space Mono',monospace;letter-spacing:.18em}
+header a{font:600 13px Inter;letter-spacing:0;color:var(--mute);text-decoration:none}header a:hover{color:var(--tx)}
+#fl{position:fixed;inset:0;pointer-events:none;opacity:0}#fl.on{animation:fl 1.3s ease-out}@keyframes fl{0%{opacity:0}15%{opacity:1}100%{opacity:0}}
+.upd{margin:6px 0 0;font-size:11px;opacity:.85}
+main{max-width:640px;margin:0 auto;padding:10px 16px 60px;text-align:center}
+.mono{font-family:'Space Mono',monospace}.sub{color:var(--mute)}
+.q{font:700 54px 'Space Mono',monospace;letter-spacing:.12em;margin:40px 0 8px;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px);opacity:.8}}
+#go{position:relative;margin:20px 0;padding:16px 46px;border:0;border-radius:10px;color:#fff;background:#0b0d10;font:800 22px Inter;letter-spacing:.08em;cursor:pointer;z-index:0;animation:glow 2.2s ease-in-out infinite}
+#go:before{content:"";position:absolute;inset:-2px;border-radius:12px;z-index:-2;background:linear-gradient(90deg,#ff3df2,var(--ac),#27c4ff,#ff3df2);background-size:300%;animation:slide 3s linear infinite}
+#go:after{content:"";position:absolute;inset:0;border-radius:10px;background:#0b0d10;z-index:-1}
+@keyframes slide{to{background-position:300%}}@keyframes glow{50%{filter:drop-shadow(0 0 14px var(--ac))}}
+#go:hover{transform:scale(1.05)}#go:active{transform:scale(.97)}
+.ring{display:inline-flex;padding:18px 24px;border:3px solid var(--c);border-radius:14px;font:700 42px 'Space Mono',monospace;transition:border-color .4s,box-shadow .6s,background .6s;
+ background:linear-gradient(135deg,color-mix(in srgb,var(--c) 22%,#14161b),#14161b);box-shadow:0 0 0 transparent}
+.ring.done{box-shadow:0 0 28px color-mix(in srgb,var(--c) 55%,transparent);animation:pulse .8s ease-out}
+.d{display:inline-block;width:.64em;text-align:center;color:var(--mute);filter:blur(.6px)}
+.d.lock{color:#fff;filter:none;animation:settle .5s ease-out}.done .d{color:var(--c);text-shadow:0 0 10px color-mix(in srgb,var(--c) 60%,transparent)}
+@keyframes settle{0%{transform:scale(1.6);text-shadow:0 0 16px #fff}100%{transform:scale(1)}}
+@keyframes pulse{0%{transform:scale(1)}20%{transform:scale(1.18)}50%{transform:scale(.98)}70%{transform:scale(1.04)}100%{transform:scale(1)}}
+.hid{opacity:0;transform:translateY(14px);pointer-events:none}.show{opacity:1;transform:none;transition:opacity .5s,transform .5s;pointer-events:auto}
+h1.n{margin:16px 0 2px;font-size:28px;font-weight:800}
+.tier{display:inline-block;margin:12px 6px 6px 0;padding:2px 10px;border:1px solid var(--c);color:var(--c);border-radius:5px;font:700 12px 'Space Mono';letter-spacing:.12em;background:color-mix(in srgb,var(--c) 14%,transparent)}
+.ep{display:inline-block;min-width:130px;padding:5px 16px;border-radius:99px;border:1px solid var(--c);color:var(--c);font:700 18px 'Space Mono';background:color-mix(in srgb,var(--c) 10%,transparent)}
+.meta{color:var(--mute);font-size:13px;margin:8px 0 14px}.btn{background:var(--card);color:var(--tx);border:1px solid var(--line);border-radius:8px;padding:9px 20px;font:600 14px Inter;cursor:pointer;transition:.15s}.btn:hover{border-color:var(--c)}
+h3{font:800 17px Inter;letter-spacing:.06em;text-transform:uppercase;margin:26px 0 4px}
+.b{display:flex;justify-content:space-between;align-items:center;gap:8px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 14px;margin:9px 0}
+.b.show{box-shadow:0 0 12px color-mix(in srgb,var(--c) 18%,transparent)}.b b{font-weight:600}.b small{display:block;color:var(--mute);margin-top:2px}
+.b span{font:700 13px 'Space Mono';color:#f5a524;border:1px solid #5b4310;background:#2a2108;border-radius:99px;padding:2px 9px;white-space:nowrap}
+a{color:#8ab4ff}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.stars{display:inline-flex;align-items:center;gap:9px;margin:12px 0 0;padding:5px 16px;border-radius:99px;border:1px solid var(--dc);color:var(--dc);background:color-mix(in srgb,var(--dc) 12%,transparent);font:700 18px 'Space Mono'}
+.stars i{font-style:normal;color:#ffd24a;font-size:21px;text-shadow:0 0 8px #ffb300}.stars span{font:600 13px Inter;letter-spacing:.05em}
+.grp{margin:22px 0 2px;text-align:left;font:700 12px 'Space Mono';letter-spacing:.14em;color:var(--mute);text-transform:uppercase}
+.rc{display:inline-block;margin-left:8px;padding:0 7px;border-radius:4px;font:700 10px 'Space Mono';letter-spacing:.08em;color:var(--k);border:1px solid var(--k);vertical-align:1px}
+footer{max-width:640px;margin:34px auto 40px;padding:16px 16px 0;border-top:1px solid var(--line);color:var(--mute);font-size:11.5px;line-height:1.55;text-align:center}
+footer a{color:#8ab4ff}footer .home{display:inline-block;margin-top:8px;font-weight:600;font-size:12.5px}
+nav{display:flex;align-items:center;gap:6px}.nv{background:none;border:0;color:var(--mute);font:600 13px Inter;cursor:pointer;padding:4px 8px}.nv:hover{color:var(--tx)}
+dialog{background:var(--card);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:18px;max-width:400px;width:90%}dialog::backdrop{background:#000a;backdrop-filter:blur(3px)}
+dialog input{display:block;width:100%;margin:8px 0;padding:10px;border-radius:8px;border:1px solid var(--line);background:#0f1115;color:var(--tx);font:15px Inter}
+.err{color:#ff6b6b;font-size:13px;min-height:18px}.row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+#lbc ol{padding-left:22px;margin:6px 0;text-align:left}#lbc li{padding:5px 0;border-bottom:1px solid var(--line)}#lbc li span{float:right;color:var(--mute);font:600 13px 'Space Mono'}
+html{scroll-behavior:smooth}::selection{background:#7c4dff66}
+:focus-visible{outline:2px solid #8ab4ff;outline-offset:2px}
+.logo{background:none;border:0;color:inherit;font:inherit;letter-spacing:inherit;cursor:pointer;padding:2px 4px;border-radius:6px;transition:.2s}.logo:hover{text-shadow:0 0 12px var(--ac);color:#fff}
+.intro{min-height:calc(100vh - 120px);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.how{max-width:640px;margin:40px auto 0;padding:0 16px;display:grid;gap:12px;text-align:left}.how h2{margin:0 0 2px;font:800 20px Inter;text-align:center}
+.how div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}.how h4{margin:0 0 6px;font-size:15px}.how p{margin:0;color:var(--mute);line-height:1.55}
+.how table{width:100%;border-collapse:collapse;font:13px 'Space Mono'}.how td{padding:3px 0}.how td:last-child{text-align:right;color:var(--mute)}
+dialog[open]{animation:pop .22s ease-out}@keyframes pop{from{opacity:0;transform:scale(.94) translateY(8px)}}
+.mi{display:block;width:100%;margin:8px 0;padding:13px 16px;text-align:left;background:#101216;color:var(--tx);border:1px solid var(--line);border-radius:10px;font:600 15px Inter;cursor:pointer;text-decoration:none;transition:.15s}
+.mi:hover{border-color:var(--ac);transform:translateX(3px)}
+#bg{max-width:520px}#bl{max-height:55vh;overflow:auto;margin:8px 0}#bl .b{margin:6px 0}
+@media(max-width:480px){.ring{font-size:26px;padding:12px 14px}.q{font-size:38px}h1.n{font-size:23px}#go{padding:14px 34px}}
+.codebox{font:700 26px 'Space Mono',monospace;letter-spacing:.06em;text-align:center;padding:16px 8px;border:2px dashed #ffb020;border-radius:10px;background:#1b1608;color:#ffd27a;user-select:all;margin:10px 0}
+.warn{color:#ffb3b3;font-size:13px;line-height:1.5;background:#2a1111;border:1px solid #5a2222;border-radius:8px;padding:10px;margin:10px 0}
+dialog input[type=checkbox]{display:inline-block;width:auto;margin:0 8px 0 0}dialog label{display:flex;align-items:center;font-size:14px;margin:10px 0}
+nav{flex-wrap:wrap;justify-content:flex-end}.tc{display:inline-block;margin:2px 4px 2px 0;padding:1px 8px;border-radius:99px;border:1px solid var(--k);color:var(--k);font:700 11px 'Space Mono'}
+#il .b small{display:block}#il .rk{font:700 15px 'Space Mono';color:var(--mute);margin-right:10px}
+nav,.nv{letter-spacing:0}dialog{border-top:3px solid var(--ac)}
+.sw{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}.swb{width:30px;height:30px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:.15s}.swb:hover{transform:scale(1.15)}.swb.on{border-color:#fff;box-shadow:0 0 10px #fff6}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}.av{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font:800 26px Inter;background:var(--ac);color:#fff;margin:0 auto 6px;box-shadow:0 0 18px var(--ac)}
+#pf{max-width:470px}#pfc{max-height:70vh;overflow:auto;text-align:left}#pfc input[type=color]{width:34px;height:34px;padding:0;border:0;background:none;margin:0;display:inline-block}
+.fcode{font:700 19px 'Space Mono';letter-spacing:.08em;color:var(--ac)}.pr{display:flex;gap:8px}.pr input{margin:8px 0}.pr .btn{margin:8px 0;white-space:nowrap}
+dialog select,dialog textarea{display:block;width:100%;margin:8px 0;padding:10px;border-radius:8px;border:1px solid var(--line);background:#0f1115;color:var(--tx);font:15px Inter}dialog textarea{resize:vertical;min-height:110px}
+.ok{color:#5ce6a1;font-size:14px;min-height:18px}
+
+@property --ta{syntax:'<angle>';initial-value:0deg;inherits:false}
+.logo,.nv,header a{position:relative;border-radius:10px}.nv,header a{padding:6px 10px}.logo{padding:4px 10px}
+.logo::before,.nv::before,header a::before{content:"";position:absolute;inset:0;border-radius:10px;padding:2px;pointer-events:none;opacity:0;
+ background:conic-gradient(from -90deg,var(--ac) var(--ta),transparent var(--ta));
+ -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;transition:--ta .55s ease,opacity .15s}
+.logo:hover::before,.nv:hover::before,header a:hover::before,.logo:focus-visible::before,.nv:focus-visible::before,header a:focus-visible::before{--ta:360deg;opacity:1}
+.pv{position:fixed;top:58px;right:16px;width:300px;border-radius:14px;overflow:hidden;background:#101216 linear-gradient(135deg,#1c1f27,#101216);border:1px solid var(--line);box-shadow:0 12px 40px #000a,0 0 22px color-mix(in srgb,var(--ac) 35%,transparent);
+ opacity:0;transform:translateY(-8px) scale(.97);pointer-events:none;transition:.22s;z-index:50}
+.pv.on{opacity:1;transform:none}.pvh{display:flex;justify-content:space-between;padding:8px 12px;font:600 12px Inter;color:var(--mute);border-bottom:1px solid var(--line)}.pvh b{color:var(--tx)}
+.pvf{position:relative;width:300px;height:188px;overflow:hidden}.pvf iframe{position:absolute;left:0;top:0;width:1200px;height:752px;border:0;transform:scale(.25);transform-origin:0 0;pointer-events:none;background:#fff}
+@media(hover:none){.pv{display:none}}
+.toast{position:fixed;right:16px;bottom:16px;width:310px;max-width:calc(100vw - 32px);padding:16px 18px 16px;background:var(--card);border:1px solid var(--line);border-radius:14px;border-top:3px solid var(--ac);
+ box-shadow:0 12px 40px #000a;z-index:60;opacity:0;transform:translate(48px,48px);pointer-events:none;transition:transform .6s cubic-bezier(.2,.9,.25,1.1),opacity .4s}
+.toast.on{opacity:1;transform:none;pointer-events:auto}.toast b{display:block;font-size:15px;margin-bottom:4px}.toast p{margin:0 0 12px;color:var(--mute);font-size:13.5px;line-height:1.5}
+.toast .x{position:absolute;top:8px;right:10px;background:none;border:0;color:var(--mute);font-size:20px;cursor:pointer;line-height:1}.toast .x:hover{color:var(--tx)}
+.toast a.btn{display:inline-block;text-decoration:none;border-color:var(--ac)}
+</style></head><body>
+<header><button class="logo" id="logo" title="Menu">GDDLE</button><nav id="nav"></nav></header><div id="fl" style="background:radial-gradient(circle at 50% 30%,color-mix(in srgb,var(--c) 45%,transparent),transparent 60%)"></div><main id="m"></main>
+<section class="how" id="how"><h2>How it works</h2>
+ <div><h4>One roll a day</h4><p>Everyone gets one roll per day (it resets at midnight UTC). The game picks a rated classic Geometry Dash level at random. Famous, long and brutal levels, and levels with more creator points, are less likely to appear.</p></div>
+ <div><h4>How EP is scored</h4><p>EP comes from two places: how rare the level is (difficulty, creator points, fame, length and demon ranking), and ID badges, which reward patterns in the level's ID number such as repeated digits, round numbers, low IDs and secret numbers.</p></div>
+ <div><h4>Tiers</h4><table><tr><td>Mythic</td><td>500,000+ EP</td></tr><tr><td>Legendary</td><td>150,000+ EP</td></tr><tr><td>Epic</td><td>50,000+ EP</td></tr><tr><td>Rare</td><td>15,000+ EP</td></tr><tr><td>Uncommon</td><td>5,000+ EP</td></tr><tr><td>Common</td><td>under 5,000 EP</td></tr></table></div>
+</section>
+<dialog id="menu"><h3 style="margin:0 0 6px">Menu</h3><div id="mi"></div><div class="row"><button class="btn" id="x3">Close</button></div></dialog>
+<dialog id="bg"><h3 style="margin:0 0 6px">Badge guide</h3><input id="bf" placeholder="Search badges" style="display:block;width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:#0f1115;color:var(--tx);font:15px Inter"><div id="bl"></div><div class="row"><button class="btn" id="x4">Close</button></div></dialog>
+<dialog id="dlg"><h3 style="margin:0 0 4px">Save your progress</h3>
+ <div class="grp" style="margin-top:6px">Have a save code? Sign in</div>
+ <input id="cin" placeholder="abc-123-def-456" autocomplete="off" spellcheck="false" maxlength="24"><div class="row"><button class="btn" id="li">Sign in</button></div>
+ <div class="grp">New here? Create an account</div>
+ <input id="nn" placeholder="Display name (optional)" maxlength="16" autocomplete="off"><div class="err" id="ae"></div>
+ <div class="row"><button class="btn" id="ca">Create account</button><button class="btn" id="x1">Close</button></div>
+ <p class="sub" style="font-size:12px;margin:0">No email and no password. You get a one-time save code. It is the only way back into your account and nobody can recover it for you.</p></dialog>
+<dialog id="cd"><h3 style="margin:0">&#9888;&#65039; Copy your save code now</h3><div id="code" class="codebox"></div><div class="row"><button class="btn" id="cc">Copy code</button></div>
+ <div class="warn">This code is shown <b>only once</b>. It is not stored anywhere and cannot be recovered. If you lose it and your cookies are cleared (or you switch devices), your account, EP and best score are gone for good. Paste it somewhere safe, like a notes app.</div>
+ <label><input type="checkbox" id="ck">I have copied my code somewhere safe</label><div class="row"><button class="btn" id="cdone" disabled>Done</button></div></dialog>
+<div class="pv" id="pv" aria-hidden="true"><div class="pvh"><b>dcat.rip</b><span>click to visit</span></div><div class="pvf"><iframe id="pvi" title="dcat.rip preview" loading="lazy" sandbox="allow-scripts" referrerpolicy="no-referrer" tabindex="-1"></iframe></div></div>
+<aside class="toast" id="kofi" role="status"><button class="x" id="kofix" aria-label="Close">&times;</button><b>&#128679; Website coming soon</b><p>You can donate to my Ko-fi to support the website.</p><a class="btn" id="kofil" target="_blank" rel="noopener" href="https://ko-fi.com/">&#9749; Support on Ko-fi</a></aside>
+<dialog id="fb"><h3 style="margin:0 0 6px">&#128172; Feedback</h3>
+ <select id="fcat"><option>Bug</option><option>Idea</option><option>Wrong level data</option><option>Other</option></select>
+ <textarea id="fmsg" maxlength="1000" placeholder="What's on your mind? Bugs, ideas, wrong level info..."></textarea>
+ <input id="fct" maxlength="100" placeholder="Discord or email (optional, only so I can reply)" autocomplete="off">
+ <input id="fhp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px">
+ <label id="flv"><input type="checkbox" id="fl2" checked>Include the level I just rolled</label>
+ <div class="err" id="fe"></div><div class="ok" id="fo"></div><div class="row"><button class="btn" id="fsend">Send</button><button class="btn" id="x7">Close</button></div>
+ <p class="sub" style="font-size:12px;margin:0">Sent privately to the site owner. Your contact is optional and only used to reply to you.</p></dialog>
+<dialog id="pf"><div id="pfc"></div><div class="row"><button class="btn" id="x6">Close</button></div></dialog>
+<dialog id="inv"><h3 style="margin:0 0 6px">🎒 Inventory</h3><div id="is"></div><div id="il" style="max-height:52vh;overflow:auto;margin:8px 0"></div><div class="row"><button class="btn" id="x5">Close</button></div></dialog>
+<dialog id="lb"><h3 style="margin:0 0 6px">Leaderboard</h3><div id="lbc"></div><div class="row"><button class="btn" id="x2">Close</button></div></dialog>
+<footer>
+ <p><b>Disclaimer.</b> GDdle is an unofficial, non-commercial fan project made for entertainment. It is not affiliated with, endorsed by, sponsored by or connected to RobTop Games AB, Geometry Dash, pointercrate.com, the Demonlist, AREDL or RNGdle. "Geometry Dash" is a trademark of RobTop Games AB. Level names, IDs and creator credits belong to their respective creators.</p>
+ <p>Level data comes from community-maintained lists and may be incomplete, outdated or wrong. Ranks, rarity tiers and EP are invented for this game and carry no official meaning. The site is provided "as is" without warranty of any kind. No game assets are used. If you create an account, only a one-way hash of your save code, a display name, your rolls and your EP are stored (no email, no password), and a cookie keeps you signed in. Feedback you send (your message plus an optional Discord or email contact) goes privately to the site owner and is only used to read and reply.</p>
+ <p class="upd">Data last updated 11/11/2026</p>
+ <a class="home" href="https://dcat.rip">⮪ Back to the home page (dcat.rip)</a>
+</footer>
+<script>
+const $=id=>document.getElementById(id),m=$('m'),sleep=t=>new Promise(r=>setTimeout(r,t)),fmt=n=>n.toLocaleString(),
+ esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const dur=ms=>{const s=Math.max(0,ms/1e3|0);return `${s/3600|0}h ${(s%3600)/60|0}m ${s%60}s`};
+const api=async p=>{const r=await fetch('/api/'+(p?'roll':'state'),{method:p?'POST':'GET'});if(!r.ok)throw 0;const d=await r.json();if('user' in d){me=d.user;if(d.color){AC=d.color;localStorage.setItem('ac',AC);paint()}nav()}return d};
+let iv,me=null;
+const post=async(u,b)=>(await fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b||{})})).json();
+function nav(){$('nav').innerHTML=`<button class="nv" id="ninv">🎒 Inventory</button><button class="nv" id="nlb">Leaderboard</button>${me?`<button class="nv" id="nme" style="color:var(--ac);font-weight:800">${esc(me)}</button><button class="nv" id="nout">Log out</button>`:'<button class="nv" id="nin">Sign in</button>'}<a href="https://dcat.rip">⮪ dcat.rip</a>`;
+ $('nlb').onclick=openLb;if(me)$('nme').onclick=openPf;$('ninv').onclick=openInv;if(me)$('nout').onclick=logout;else $('nin').onclick=()=>{$('ae').textContent='';$('dlg').showModal()}}
+const authGo=async(u,b)=>{const d=await post(u,b);if(d.error){$('ae').textContent=d.error;return}
+ if(d.code){$('dlg').close();$('code').textContent=d.code;$('ck').checked=false;$('cdone').disabled=true;$('cc').textContent='Copy code';$('cd').showModal()}else location.reload()};
+$('li').onclick=()=>authGo('/api/login',{code:$('cin').value});$('ca').onclick=()=>authGo('/api/register',{name:$('nn').value.trim()});
+$('x1').onclick=()=>$('dlg').close();$('x2').onclick=()=>$('lb').close();
+$('ck').onchange=()=>$('cdone').disabled=!$('ck').checked;$('cdone').onclick=()=>location.reload();
+$('cc').onclick=async()=>{await navigator.clipboard.writeText($('code').textContent);$('cc').textContent='Copied \u2705'};
+$('cd').addEventListener('cancel',e=>e.preventDefault());
+addEventListener('beforeunload',e=>{if($('cd').open&&!$('ck').checked){e.preventDefault();e.returnValue=''}});
+async function logout(){if(!confirm('Log out? You will need your save code to sign back in. If you never copied it, this account is lost.'))return;await post('/api/logout');location.reload()}
+const TC={MYTHIC:'#ff4fd8',LEGENDARY:'#ffb020',EPIC:'#a86bff',RARE:'#4aa3ff',UNCOMMON:'#34d399',COMMON:'#9ca3af'};
+async function openInv(){const d=await(await fetch('/api/inventory')).json();
+ $('is').innerHTML=`<div class="sub" style="font-size:13px">${fmt(d.rolls)} rolls \u00b7 ${fmt(d.ep)} lifetime EP</div><div style="margin:8px 0">${Object.keys(TC).filter(t=>d.tiers[t]).map(t=>`<span class="tc" style="--k:${TC[t]}">${t} x${d.tiers[t]}</span>`).join('')}</div>${d.signedIn?'':'<div class="warn">You are not signed in, so this inventory is lost if you clear your cookies. Create an account to get a save code.</div>'}`;
+ $('il').innerHTML=d.top.length?d.top.map((x,i)=>`<div class="b show"><div><span class="rk">#${i+1}</span><b>${esc(x.name)}</b><span class="tc" style="--k:${TC[x.tier]||'#9ca3af'};margin-left:8px">${x.tier}</span><small>#${x.id}${x.st?' \u00b7 '+x.st+'\u2605 '+esc(x.diff||''):''} \u00b7 ${x.day}</small></div><span>${fmt(x.ep)} EP</span></div>`).join(''):'<p class="sub">No rolls yet. Press GENERATE.</p>';
+ $('inv').showModal()}
+$('x5').onclick=()=>$('inv').close();
+const SW=['#7c4dff','#ff3df2','#27c4ff','#34d399','#ffb020','#ff5a5f','#ff8a4f','#a3e635','#f472b6','#94a3b8'];
+let AC=localStorage.getItem('ac')||'#7c4dff';const paint=()=>document.documentElement.style.setProperty('--ac',AC);paint();
+const friendRow=x=>`<div class="b show"><div><span class="dot" style="background:${x.color||'#94a3b8'}"></span><b>${esc(x.user)}</b>${x.today?`<span class="tc" style="--k:${TC[x.today]||'#9ca3af'};margin-left:8px">${x.today}</span>`:''}<small>${fmt(x.ep)} lifetime EP \u00b7 best ${fmt(x.best)}${x.bn?' ('+esc(x.bn)+')':''}</small></div><button class="btn" data-rm="${x.fc}">Remove</button></div>`;
+function renderPf(p,msg){const sw=`<div class="grp">Colour</div><div class="sw">${SW.map(c=>`<button class="swb${c==AC?' on':''}" data-c="${c}" style="background:${c}" aria-label="${c}"></button>`).join('')}<input type="color" id="pcc" value="${AC}"></div>`;
+ if(!p.user){$('pfc').innerHTML=`<div class="av">?</div><div style="text-align:center" class="sub">Guest profile</div>${sw}<div class="warn" style="margin-top:14px">Create an account (menu &gt; Sign in) to get a display name, a friend code and a friends list.</div>`;return}
+ $('pfc').innerHTML=`<div class="av">${esc(p.user[0].toUpperCase())}</div><div style="text-align:center"><b style="font-size:20px">${esc(p.user)}</b><div class="sub" style="font-size:13px">${fmt(p.ep)} lifetime EP \u00b7 best ${fmt(p.best)} \u00b7 ${fmt(p.rolls)} rolls</div></div>
+ <div class="grp">Display name</div><div class="pr"><input id="pnm" maxlength="16" value="${esc(p.user)}"><button class="btn" id="pns">Save</button></div>${sw}
+ <div class="grp">Your friend code</div><div class="pr" style="align-items:center"><span class="fcode">${p.fc}</span><button class="btn" id="pfcp" style="margin-left:auto">Copy</button></div><div class="sub" style="font-size:12px">Share it so friends can add you. Anyone with it can see your EP and best roll.</div>
+ <div class="grp">Friends (${p.friends.length})</div><div class="pr"><input id="pfi" placeholder="Friend code, e.g. K7M-2QX" maxlength="8"><button class="btn" id="pfa">Add</button></div><div class="err" id="pe">${msg?esc(msg):''}</div>
+ ${p.friends.map(friendRow).join('')||'<p class="sub">No friends yet. Add someone with their friend code.</p>'}`}
+let PF=null;
+async function openPf(){PF=await(await fetch('/api/profile')).json();renderPf(PF);$('pf').showModal()}
+async function pfPost(u,b){const d=await post(u,b);if(d.error){renderPf(PF,d.error);return}PF=d;renderPf(PF)}
+$('pfc').onclick=async e=>{const t=e.target,c=t.dataset.c;
+ if(c){AC=c;localStorage.setItem('ac',c);paint();if(PF.user)return pfPost('/api/profile',{color:c});return renderPf(PF)}
+ if(t.dataset.rm)return pfPost('/api/unfriend',{code:t.dataset.rm});
+ if(t.id=='pns')return pfPost('/api/profile',{name:$('pnm').value});
+ if(t.id=='pfa')return pfPost('/api/friend',{code:$('pfi').value});
+ if(t.id=='pfcp'){await navigator.clipboard.writeText(PF.fc);t.textContent='Copied \u2705'}};
+$('pfc').onchange=e=>{if(e.target.id=='pcc'){AC=e.target.value;localStorage.setItem('ac',AC);paint();if(PF.user)pfPost('/api/profile',{color:AC});else renderPf(PF)}};
+$('x6').onclick=()=>$('pf').close();
+const KOFI_URL='https://ko-fi.com/'; // <- put your own Ko-fi page link here
+$('kofil').href=KOFI_URL;
+{const k=$('kofi'),seen=+localStorage.getItem('kofiX')||0;
+ if(Date.now()-seen>6048e5)setTimeout(()=>k.classList.add('on'),1400);
+ $('kofix').onclick=()=>{k.classList.remove('on');localStorage.setItem('kofiX',Date.now())}}
+{const pv=$('pv');let t;
+ document.addEventListener('mouseover',e=>{const a=e.target.closest&&e.target.closest('header a[href="https://dcat.rip"]');if(!a)return;clearTimeout(t);
+  if(!pv.dataset.l){$('pvi').src='https://dcat.rip';pv.dataset.l=1}pv.classList.add('on')});
+ document.addEventListener('mouseout',e=>{if(e.target.closest&&e.target.closest('header a[href="https://dcat.rip"]'))t=setTimeout(()=>pv.classList.remove('on'),120)})}
+let LAST=null;
+function openFb(cat){$('fcat').value=cat||'Bug';$('fmsg').value='';$('fe').textContent='';$('fo').textContent='';$('fsend').disabled=false;$('flv').style.display=LAST?'flex':'none';$('fb').showModal()}
+$('x7').onclick=()=>$('fb').close();
+$('fsend').onclick=async()=>{$('fe').textContent='';$('fsend').disabled=true;const d=await post('/api/feedback',{cat:$('fcat').value,msg:$('fmsg').value,contact:$('fct').value,website:$('fhp').value,level:LAST&&$('fl2').checked?LAST:null});
+ if(d.error){$('fe').textContent=d.error;$('fsend').disabled=false}else{$('fo').textContent='Thanks! Your feedback was sent. \u2705';setTimeout(()=>$('fb').close(),1400)}};
+let BG=null;
+async function openBadges(){if(!BG)BG=await(await fetch('/api/badges')).json();const draw=q=>$('bl').innerHTML=BG.filter(b=>(b.n+' '+b.d).toLowerCase().includes(q)).map(b=>`<div class="b show"><div><b>${esc(b.n)}</b><span class="rc" style="--k:${RC[b.r]}">${b.r}</span><small>${esc(b.d)}</small></div><span>+${fmt(b.e)} EP</span></div>`).join('')||'<p class="sub">No match.</p>';
+ $('bf').oninput=e=>draw(e.target.value.toLowerCase());$('bf').value='';draw('');$('bg').showModal()}
+function openMenu(){$('mi').innerHTML=`<button class="mi" data-a="play">\ud83c\udfb2 Play</button><button class="mi" data-a="pf">🎨 Profile</button><button class="mi" data-a="inv">🎒 Inventory</button><button class="mi" data-a="lb">\ud83c\udfc6 Leaderboard</button><button class="mi" data-a="bg">\ud83c\udfc5 Badge guide</button><button class="mi" data-a="how">\u2753 How it works</button><button class="mi" data-a="acc">\ud83d\udc64 ${me?'Log out ('+esc(me)+')':'Sign in / Create account'}</button><button class="mi" data-a="fb">💬 Feedback</button><a class="mi" href="https://dcat.rip">\u2baa Back to dcat.rip</a>`;$('menu').showModal()}
+$('logo').onclick=openMenu;$('x3').onclick=()=>$('menu').close();$('x4').onclick=()=>$('bg').close();
+$('menu').onclick=async e=>{if(e.target===e.currentTarget)return $('menu').close();const a=e.target.dataset.a;if(!a)return;$('menu').close();
+ if(a=='play')scrollTo({top:0});else if(a=='fb')openFb();else if(a=='pf')openPf();else if(a=='inv')openInv();else if(a=='lb')openLb();else if(a=='bg')openBadges();else if(a=='how')$('how').scrollIntoView();
+ else if(a=='acc'){if(me)logout();else{$('ae').textContent='';$('dlg').showModal()}}};
+async function openLb(){const d=await(await fetch('/api/leaderboard')).json(),t=(rows,f)=>rows.length?`<ol>${rows.map(x=>`<li><b>${esc(x.user)}</b><span>${f(x)}</span></li>`).join('')}</ol>`:'<p class="sub">Nobody here yet.</p>';
+ $('lbc').innerHTML=`<div class="grp">Lifetime EP</div>${t(d.ep,x=>fmt(x.ep)+' EP')}<div class="grp">Best single roll</div>${t(d.best,x=>fmt(x.best)+' EP · '+esc(x.bn))}`;$('lb').showModal()}
+const DC={Auto:'#f2d34f',Easy:'#5ce6a1',Normal:'#4fd1ff',Hard:'#ffb347',Harder:'#ff8a4f',Insane:'#ff5fb8','Easy Demon':'#c58bff','Medium Demon':'#b565ff','Hard Demon':'#a040ff','Insane Demon':'#8a2be2','Extreme Demon':'#ff3b3b'};
+const RC={MYTHIC:'#ff4fd8',ANOMALY:'#ff7a45',EPIC:'#a86bff',RARE:'#4aa3ff',SINGULAR:'#34d399',COMMON:'#9ca3af'};
+const bestHtml=d=>[d.best&&`🏆 Your best ever: ${fmt(d.best.ep)} EP · ${esc(d.best.name)}`,d.record&&`👑 Site record: ${fmt(d.record.ep)} EP · ${esc(d.record.name)}`].filter(Boolean).join('<br>');
+const card=(n,d,e,r)=>`<div class="b hid"><div><b>${esc(n)}</b>${r?`<span class="rc" style="--k:${RC[r]}">${r}</span>`:''}<small>${esc(d)}</small></div><span>+${fmt(e)} EP</span></div>`;
+function intro(d={}){m.style.setProperty('--c','#6b7280');
+ m.innerHTML=`<div class="intro"><div class="q">??????</div><p class="sub">One roll a day. One level. What will yours be?</p><button id="go">GENERATE</button>
+ <p class="sub" style="font-size:13px">Famous, long and brutal levels are rarer. Lucky IDs score big.</p><p class="meta">${bestHtml(d)}</p>${me?'':'<p class="sub" style="font-size:12px">Create an account to get a save code. If you clear your cookies without one, your EP and best score are lost.</p>'}</div>`;
+ $('go').onclick=async()=>{$('go').disabled=true;try{const d=await api(1);show(d,!!d.roll)}catch{$('go').disabled=false;alert('The roll failed. Please try again.')}}}
+async function show(d,anim){
+ const r=d.roll;if(!r)return intro();LAST={id:r.level.id,name:r.level.name};const L=r.level,s=String(L.id),n=s.length;
+ const len=L.secs?`${L.secs/60|0}:${String(L.secs%60).padStart(2,'0')}`:null;
+ m.style.setProperty('--c','#6b7280');
+ m.innerHTML=`<div style="margin-top:34px"><div class="ring" id="ring">${'<span class="d">0</span>'.repeat(n)}</div></div>
+ <div style="margin-top:16px"><span class="ep" id="ep">??? EP</span></div>
+ <div id="info" class="hid"><h1 class="n">${esc(L.name)}</h1>
+  <div class="sub">by ${esc(L.by)}${len?' · '+len:''}${L.main?' · MAIN LEVEL':''}</div>
+  <div class="stars" style="--dc:${DC[L.diff]||'#aaa'}"><i>&#9733;</i>${L.st}<span>${esc(L.diff.toUpperCase())}</span></div>
+  <div><span class="tier" id="tier">${r.tier}</span><span class="sub">level rarity: top ${r.top}%</span></div>
+  <div class="meta">Level ${fmt(r.rPts)} EP + ID ${fmt(r.idPts)} EP · lifetime ${fmt(d.lifetime)} EP · ${L.cp} CP</div>
+  ${r.wr?'<div><span class="tier">NEW SITE RECORD 👑</span></div>':r.pb?'<div><span class="tier">NEW PERSONAL BEST 🏆</span></div>':''}
+  <div class="meta">${bestHtml(d)}</div>
+  <p><button class="btn" id="sh">Share</button> <a target="_blank" href="https://gdbrowser.com/${L.id}">open on GDBrowser</a> &middot; <a href="#" id="rep">report a problem</a></p>
+  <p class="sub">Next roll in <b id="cd"></b></p></div>
+ <div id="bd" class="hid"><h3>EP Breakdown</h3><div class="sub" style="font-size:13px">${r.parts.length+r.badges.length} sources</div>
+ <div class="grp">Level rarity · top ${r.top}% of levels · +${fmt(r.rPts)} EP</div>${r.parts.map(p=>card(p.n,p.d,p.e)).join('')}
+ <div class="grp">ID badges · +${fmt(r.idPts)} EP</div>${r.badges.map(b=>card(b.n,b.d,b.e,b.r)).join('')||'<p class="sub">No ID badges this time.</p>'}</div>`;
+ const ds=[...$('ring').children],ring=$('ring');
+ if(anim){let lk=0;const t=setInterval(()=>ds.forEach((x,i)=>{if(i>=lk)x.textContent=Math.random()*10|0}),55);
+  for(let i=0;i<n;i++){await sleep(260+i*55+(i==n-1?450:0));ds[i].textContent=s[i];ds[i].classList.add('lock');lk=i+1}
+  clearInterval(t);await sleep(350)}else ds.forEach((x,i)=>x.textContent=s[i]);
+ m.style.setProperty('--c',r.color);ring.classList.add('done');
+ if(anim&&['EPIC','LEGENDARY','MYTHIC'].includes(r.tier)){const f=$('fl');f.style.setProperty('--c',r.color);f.classList.remove('on');void f.offsetWidth;f.classList.add('on')}
+ const ep=$('ep');if(anim){const t0=performance.now();await new Promise(res=>{(function f(t){const k=Math.min(1,(t-t0)/1100);ep.textContent=fmt(Math.round(r.ep*(1-Math.pow(1-k,3))))+' EP';k<1?requestAnimationFrame(f):res()})(t0)})}else ep.textContent=fmt(r.ep)+' EP';
+ $('info').classList.replace('hid','show');await sleep(anim?500:0);$('bd').classList.replace('hid','show');
+ for(const b of document.querySelectorAll('.b')){await sleep(anim?160:0);b.classList.replace('hid','show')}
+ $('sh').onclick=async()=>{
+  const TE={MYTHIC:'🌌',LEGENDARY:'👑',EPIC:'🔮',RARE:'💠',UNCOMMON:'🟢',COMMON:'⚪'},tb=r.badges[0];
+  const txt=[`🎲 GDdle ${r.day}`,`🎯 ${L.name} (#${L.id})`,`⭐ ${L.st} ${L.diff} · ${TE[r.tier]} ${r.tier}`,
+   `💰 ${fmt(r.ep)} EP${tb?` · 🏅 ${tb.n}`:''}`,location.hostname=='localhost'?'':location.origin].filter(Boolean).join('\n');
+  await navigator.clipboard.writeText(txt);const s=$('sh');s.textContent='Copied! ✅';setTimeout(()=>s.textContent='Share',1600)}
+ $('rep').onclick=e=>{e.preventDefault();openFb('Wrong level data')};let left=d.msLeft;clearInterval(iv);const t=()=>{$('cd').textContent=dur(left);left-=1000};t();iv=setInterval(t,1000);
+}
+api().then(d=>d.roll?show(d,false):intro(d)).catch(()=>{m.innerHTML='<p class="sub" style="margin-top:60px">Could not reach the server. Try again in a moment.</p>'});
+</script></body></html>
