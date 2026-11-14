@@ -1,0 +1,12 @@
+# private or generated
+data/players.json
+data/codes.json
+data/record.json
+data/feedback.jsonl
+data/force.json
+webhook.txt
+*.xlsx
+useful.html
+pointercrate*.json
+__pycache__/
+node_modules/
